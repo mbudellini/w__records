@@ -6,11 +6,10 @@ const axios = require("axios");
 const getCollection = async (req, res) => {
   try {
     const response = await axios.get(
-      "https://api.discogs.com/database/search?q=Nirvana&token=KLFeKFjuERpdHJsrNQGCoSUUTbPGfcTskJfkuHIP"
+      "https://api.discogs.com//users/disqueria_what/collection/folders&token=KLFeKFjuERpdHJsrNQGCoSUUTbPGfcTskJfkuHIP",
     );
-    console.log(response.data)
-    res.send({ ok: true, message:response.data });
-
+    console.log(response.data);
+    res.send({ ok: true, message: response.data });
   } catch (error) {
     res.send({ ok: false, message: error.message });
   }
