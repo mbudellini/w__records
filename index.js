@@ -19,6 +19,6 @@ connectingToDB()
 app.use(require('cors')())
 //==========================================================================
 //app.use('/test',require('./routes/routes.js'))
-app.use('./getCollection',require('./routes/discogsCollection_routes.js'))
+app.use('/records',require('./routes/discogsCollection_routes.js'))
 //==========================================================================
 app.listen(port, () => console.log("🚀 Listening on port: " + port + " 🚀"));
