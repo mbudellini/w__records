@@ -1,20 +1,62 @@
-//uncomment if you need to use the database
-//const Test = require('../models/models.test')
-
 const axios = require("axios");
+const Record = require("../models/discogsCollection_model");
+
+const BASE_URL =
+  "https://api.discogs.com/users/disqueria_what/collection/folders/0/releases?token=KLFeKFjuERpdHJsrNQGCoSUUTbPGfcTskJfkuHIP";
+const HEADERS = { headers: { "User-Agent": "w__records/1.0" } };
 
 const getCollection = async (req, res) => {
   try {
-    const response = await axios.get(
-      "https://api.discogs.com//users/disqueria_what/collection/folders&token=KLFeKFjuERpdHJsrNQGCoSUUTbPGfcTskJfkuHIP",
-    );
-    console.log(response.data);
+    const response = await axios.get(BASE_URL, HEADERS);
     res.send({ ok: true, message: response.data });
   } catch (error) {
     res.send({ ok: false, message: error.message });
   }
 };
 
+const saveCollection = async (req, res) => {
+  try {
+    let page = 1;
+    let totalPages = 1;
+    let saved = 0;
+
+    do {
+      const response = await axios.get(`${BASE_URL}&page=${page}`, HEADERS);
+      const { pagination, releases } = response.data;
+      totalPages = pagination.pages;
+
+      for (const release of releases) {
+        await Record.findOneAndUpdate({ id: release.id }, release, {
+          upsert: true,
+          returnDocument: "after",
+        });
+        saved++;
+      }
+
+      page++;
+    } while (page <= totalPages);
+
+    res.send({ ok: true, message: `${saved} records saved to the database.` });
+  } catch (error) {
+    res.send({ ok: false, message: error.message });
+  }
+};
+
+const getCollectionFromDB = async (req, res) => {
+  try {
+    const records = await Record.find();
+    res.send({ 
+      ok: true, 
+      message: `Retrieved ${records.length} records from database.`,
+      data: records 
+    });
+  } catch (error) {
+    res.send({ ok: false, message: error.message });
+  } 
+};
+
 module.exports = {
+  getCollectionFromDB,
   getCollection,
+  saveCollection,
 };

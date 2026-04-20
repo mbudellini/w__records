@@ -1,0 +1,30 @@
+img {
+  width:15vw;
+  height: auto;
+  object-fit: contain;
+  aspect-ratio: 1;
+}
+
+.flex {
+  display: flex;
+}
+.spaceBetween {
+  justify-content: space-between;
+}
+.sideMargin5 {
+  margin: 0 2vw;
+}
+.centered {
+  align-items: center;
+}
+.height3 {
+  height: 3vh;
+}
+.height7 {
+  height: 7vh;
+}
+.gridRecordPage {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+ gap: 1vw;
+}
