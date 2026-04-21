@@ -1,8 +1,11 @@
 img {
-  width:15vw;
+  width: 15vw;
   height: auto;
   object-fit: contain;
   aspect-ratio: 1;
+}
+body {
+  margin: 0;
 }
 
 .flex {
@@ -11,14 +14,14 @@ img {
 .spaceBetween {
   justify-content: space-between;
 }
-.sideMargin5 {
+.sideMargin2 {
   margin: 0 2vw;
 }
 .centered {
   align-items: center;
 }
 .height3 {
-  height: 3vh;
+  height: 5vh;
 }
 .height7 {
   height: 7vh;
@@ -26,11 +29,29 @@ img {
 .gridRecordPage {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
- gap: 1vw;
+  gap: 1vw;
+  background-color: #86BBD8;
 }
-.playfair-display {
-  font-family: "Playfair Display", serif;
+
+.lexend-exa {
+  font-family: "Lexend Exa", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 400;
+  font-weight: 200;
   font-style: normal;
+}
+
+.record-card {
+  margin: 0 2vh;
+}
+
+.header {
+  height:10vh;
+  background-color: #F26419;
+  align-content: center;
+}
+.margin0 {
+  margin: 0 0 0 0;
+}
+.titleAndYear{
+  color:black;
 }
