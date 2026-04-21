@@ -26,7 +26,7 @@ const saveCollection = async (req, res) => {
       totalPages = pagination.pages;
 
       for (const release of releases) {
-        await Record.findOneAndUpdate({ id: release.id }, release, {
+        await Record.findOneAndUpdate({ instance_id: release.instance_id }, release, {
           upsert: true,
           returnDocument: "after",
         });
