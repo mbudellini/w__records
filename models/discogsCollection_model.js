@@ -22,6 +22,11 @@ const DiscogsCollectionSchema = new mongoose.Schema({
     max: 5,
     default: 0,
   },
+  price: {
+    type: Number,
+    min: 0,
+    default: 0,
+  },
   basic_information: {
     id: Number,
     master_id: Number,
