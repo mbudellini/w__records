@@ -1,4 +1,3 @@
-
 import { Link } from "react-router";
 import { useState, useEffect } from "react";
 function Catalogue() {
@@ -26,17 +25,14 @@ function Catalogue() {
       <div className="gridRecordPage">
         {records.map((record) => (
           <div className="record-card" key={record._id}>
-            <Link
-              to={`/record/${record.id}`}
-              className="record-card-link"
-            >
+            <Link to={`/record/${record.id}`} className="record-card-link">
               <img
                 src={record.basic_information.cover_image}
                 alt={record.basic_information.title}
               />
               <div className="titleAndYear">
-              <h5>{record.basic_information.title}</h5>
-              <p>{record.basic_information.year}</p>
+                <h5>{record.basic_information.title}</h5>
+                <p>{record.basic_information.year}</p>
               </div>
             </Link>
           </div>
