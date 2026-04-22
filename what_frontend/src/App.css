@@ -30,7 +30,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 1vw;
-  background-color: #86BBD8;
+  background-color: #86bbd8;
 }
 
 .lexend-exa {
@@ -45,23 +45,33 @@ body {
 }
 
 .header {
-  height:10vh;
-  background-color: #F26419;
+  height: 10vh;
+  background-color: #f26419;
   align-content: center;
 }
 .margin0 {
   margin: 0 0 0 0;
 }
-.titleAndYear{
-  color:black;
+.titleAndYear {
+  color: black;
 }
-.boxSizing{
+.boxSizing {
   box-sizing: content-box;
 }
-.leftMarginAuto{
+.leftMarginAuto {
   margin-left: auto;
 }
 
 .center {
-margin-left: auto;
-} 
+  padding: 2% 0;
+  margin: auto;
+  width: 20vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  margin-top: 10%;
+  text-align: center;
+  border: solid;
+  border-color: #f26419;
+}
