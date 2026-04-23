@@ -72,6 +72,8 @@ body {
   height: auto;
   margin-top: 10%;
   text-align: center;
+}
+.orangeBorder {
   border: solid;
   border-color: #f26419;
 }

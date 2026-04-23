@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { useState, useEffect } from "react";
+import {BeatLoader} from 'react-spinners'
 function Catalogue() {
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,7 +21,9 @@ function Catalogue() {
 
   return (
     <div className="lexend-exa">
-      {loading && <p>Loading...</p>}
+      {loading && <div className="center">
+        <BeatLoader />
+        </div>}
       {error && <p>Error: {error}</p>}
       <div className="gridRecordPage">
         {records.map((record) => (
