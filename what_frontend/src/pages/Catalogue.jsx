@@ -22,7 +22,7 @@ function Catalogue() {
 const uniqueRecords = [...new Map(records.map(r => [r.id, r])).values()];
 
   return (
-    <div className="lexend-exa">
+    <div className="lexend-exa yellowBackground">
       {loading && <div className="centerWithinMain">
         <BeatLoader />
         </div>}
@@ -36,7 +36,7 @@ const uniqueRecords = [...new Map(records.map(r => [r.id, r])).values()];
               />
               <div className="titleandYear">
                 <h5>{record.basic_information.title}</h5>
-                <p>{record.basic_information.year}</p>
+                <p>{record.basic_information.artists[0].name} {record.basic_information.artists[1]?.name} </p>
               </div>
             </Link>
         ))}

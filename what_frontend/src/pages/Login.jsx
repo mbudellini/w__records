@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
 
-function Login(login) {
+function Login({login}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handleEmail = (e) => {

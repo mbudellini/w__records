@@ -34,6 +34,7 @@ body {
   gap: 1vw;
   padding: 1vw;
   background-color: #F8E890;
+  min-height: 100vh;
 }
 
 .lexend-exa {
@@ -83,10 +84,14 @@ body {
 }
 .nav {
   background-color: #b490f8;
-  border: solid;
+  border-top: solid;
+  border-bottom: solid;
   height: 70px;
 }
 .titleandYear{
   padding:0.8vw;
   color:black
+}
+.yellowBackground{
+  background-color: #F8E890;
 }
