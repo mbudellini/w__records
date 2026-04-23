@@ -1,11 +1,13 @@
 img {
-  width: 15vw;
-  height: auto;
-  object-fit: contain;
-  aspect-ratio: 1;
+  width: 100%;
+  height: 20vw;
+  object-fit: cover; /* ← riempie senza spazi vuoti */
+  display: block;
+  aspect-ratio: unset;
 }
 body {
   margin: 0;
+  background-color: #90D4F8;
 }
 
 .flex {
@@ -28,9 +30,10 @@ body {
 }
 .gridRecordPage {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(5, 1fr);
   gap: 1vw;
-  background-color: #86bbd8;
+  padding: 1vw;
+  background-color: #F8E890;
 }
 
 .lexend-exa {
@@ -41,19 +44,20 @@ body {
 }
 
 .record-card {
-  margin: 0 2vh;
+  border-radius: 12px;
+  overflow: hidden; /* ← fondamentale: taglia l'immagine agli angoli */
+  background-color: #90D4F8;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
   height: 10vh;
-  background-color: #f26419;
+  background-color: #90d4f8;
   align-content: center;
 }
 .margin0 {
   margin: 0 0 0 0;
-}
-.titleAndYear {
-  color: black;
 }
 .boxSizing {
   box-sizing: content-box;
@@ -62,7 +66,7 @@ body {
   margin-left: auto;
 }
 
-.center {
+.centerWithinMain {
   padding: 2% 0;
   margin: auto;
   width: 20vw;
@@ -74,6 +78,15 @@ body {
   text-align: center;
 }
 .orangeBorder {
+  border:solid;
+  border-color: black;
+}
+.nav {
+  background-color: #b490f8;
   border: solid;
-  border-color: #f26419;
+  height: 70px;
+}
+.titleandYear{
+  padding:0.8vw;
+  color:black
 }

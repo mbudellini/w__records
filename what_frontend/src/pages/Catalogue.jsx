@@ -19,26 +19,26 @@ function Catalogue() {
       });
   }, []);
 
+const uniqueRecords = [...new Map(records.map(r => [r.id, r])).values()];
+
   return (
     <div className="lexend-exa">
-      {loading && <div className="center">
+      {loading && <div className="centerWithinMain">
         <BeatLoader />
         </div>}
       {error && <p>Error: {error}</p>}
       <div className="gridRecordPage">
-        {records.map((record) => (
-          <div className="record-card" key={record._id}>
-            <Link to={`/record/${record.id}`} className="record-card-link">
+        {uniqueRecords.map((record) => (
+            <Link to={`/record/${record.id}`} className="record-card-link record-card orangeBorder" key={record._id}>
               <img
                 src={record.basic_information.cover_image}
                 alt={record.basic_information.title}
               />
-              <div className="titleAndYear">
+              <div className="titleandYear">
                 <h5>{record.basic_information.title}</h5>
                 <p>{record.basic_information.year}</p>
               </div>
             </Link>
-          </div>
         ))}
       </div>
     </div>

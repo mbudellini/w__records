@@ -40,7 +40,7 @@ function Register() {
   };
 
   return (
-    <div className="center">
+    <div className="centerWithinMain">
         <div>
       <p>email</p>
       <input type="email" onChange={handleEmail}></input>

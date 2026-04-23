@@ -32,7 +32,7 @@ function Login(login) {
   };
 
   return (
-    <div className="center orangeBorder">
+    <div className="centerWithinMain orangeBorder">
       <div>
         <p>email</p>
         <input type="email" onChange={handleEmail}></input>

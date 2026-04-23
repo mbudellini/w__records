@@ -43,7 +43,7 @@ function App() {
     localStorage.setItem("token", JSON.stringify(token));
     localStorage.setItem("user", JSON.stringify(user));
     setUser(user);
-    setToken(token)
+    setToken(token);
     setIsLoggedIn(true);
   };
 
@@ -52,7 +52,6 @@ function App() {
     localStorage.removeItem("user");
     setIsLoggedIn(false);
   };
-  console.log(isLoggedIn)
   return (
     <Router>
       <div className="lexend-exa">
@@ -60,7 +59,7 @@ function App() {
           <h1 className="margin0"> Disqueria What?</h1>
         </header>
         <main>
-          <Navbar isLoggedIn={isLoggedIn} user={user}/>
+          <Navbar isLoggedIn={isLoggedIn} user={user} />
           <Routes>
             <Route path="/" element={<Catalogue />} />
             <Route path="/record/:recordId" element={<Record />} />
