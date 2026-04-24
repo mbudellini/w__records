@@ -7,7 +7,7 @@ img {
 }
 body {
   margin: 0;
-  background-color: #90D4F8;
+  background-color: #FAFAFA;
 }
 
 .flex {
@@ -33,29 +33,30 @@ body {
   grid-template-columns: repeat(5, 1fr);
   gap: 1vw;
   padding: 1vw;
-  background-color: #F8E890;
+  background-color: #FAFAFA;
   min-height: 100vh;
 }
 
 .lexend-exa {
   font-family: "Lexend Exa", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 200;
+  font-weight: 100;
   font-style: normal;
 }
 
 .record-card {
   border-radius: 12px;
   overflow: hidden; /* ← fondamentale: taglia l'immagine agli angoli */
-  background-color: #90D4F8;
+  background-color: #FFFFFF;
   display: flex;
   flex-direction: column;
 }
 
 .header {
   height: 10vh;
-  background-color: #90d4f8;
+  background-color: #2F6F5E;
   align-content: center;
+  color: white;
 }
 .margin0 {
   margin: 0 0 0 0;
@@ -75,7 +76,7 @@ body {
   justify-content: center;
   align-items: center;
   height: auto;
-  margin-top: 10%;
+  padding: top 50%;
   text-align: center;
 }
 .orangeBorder {
@@ -83,15 +84,22 @@ body {
   border-color: black;
 }
 .nav {
-  background-color: #b490f8;
+  background-color: white;
   border-top: solid;
   border-bottom: solid;
   height: 70px;
+  color: #2F6F5E;
+}
+.nav a{
+  color: #2F6F5E;
+  font-size: 16px;
+}
+.nav a:hover{
+  color: #2F6F5E;
+  font-size: 18px;
+  text-shadow: 1px 1px;
 }
 .titleandYear{
   padding:0.8vw;
   color:black
-}
-.yellowBackground{
-  background-color: #F8E890;
 }

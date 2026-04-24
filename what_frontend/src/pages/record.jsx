@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import "../styles/record.css";
+import axios from 'axios'
 
-function Record() {
+function Record({ userEmail }) {
   const { recordId } = useParams();
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -58,22 +59,34 @@ function Record() {
     };
   };
 
-  const handleAddToCart = (record, index) => {
-    const cartItem = {
-      instance_id: record.instance_id,
-      id: record.id,
-      title: record.basic_information.title,
-      price: record.price || 15.99,
-      quantity: quantities[index] || 1,
-      image: record.basic_information.cover_image,
-      condition: getCondition(record),
-    };
+  const handleAddToCart = async (record, index) => {
+    try {
+      
+      if (!userEmail) {
+        alert("Please login first to add items to cart");
+        return;
+      }
 
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    cart.push(cartItem);
-    localStorage.setItem("cart", JSON.stringify(cart));
+      const cartItem = {
+        userEmail,
+        instance_id: record.instance_id,
+        id: record.id,
+        title: record.basic_information.title,
+        price: record.price || 15.99,
+        quantity: quantities[index] || 1,
+        cover_image: record.basic_information.cover_image,
+      };
 
-    alert(`Added ${quantities[index]} copy(ies) to cart!`);
+      const response = await axios.post("http://localhost:4444/cart/addToCart", cartItem);
+
+      if (response.data.ok) {
+        alert(`Added ${quantities[index]} copy(ies) to cart!`);
+      } else {
+        alert(`Error: ${response.data.message}`);
+      }
+    } catch (error) {
+      alert(`Failed to add to cart: ${error.message}`);
+    }
   };
 
   if (loading) return <div className="loading">Loading...</div>;

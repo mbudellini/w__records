@@ -8,6 +8,7 @@ import Navbar from "./elements/Navbar.jsx";
 import { useState, useEffect } from "react";
 import * as jose from "Jose";
 import axios from "axios";
+import Cart from "./pages/Cart.jsx";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
@@ -55,15 +56,19 @@ function App() {
     <Router>
       <div className="lexend-exa">
         <header className="header">
-          <h1 className="margin0"> Disqueria What?</h1>
+          <h1 className="sideMargin2"> Disqueria What?</h1>
         </header>
         <main>
           <Navbar isLoggedIn={isLoggedIn} user={user} />
           <Routes>
             <Route path="/" element={<Catalogue />} />
-            <Route path="/record/:recordId" element={<Record />} />
+            <Route
+              path="/record/:recordId"
+              element={<Record userEmail={user?.email} />}
+            />
             <Route path="/users/login" element={<Login login={login} />} />
             <Route path="/users/register" element={<Register />} />
+            <Route path="/cart" element={<Cart userEmail={user?.email} />} />
           </Routes>
         </main>
       </div>
