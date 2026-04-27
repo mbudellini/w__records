@@ -1,0 +1,135 @@
+.catalogue {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.catalogue-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40vh;
+}
+
+.catalogue-error {
+  text-align: center;
+  padding: 40px;
+  color: var(--danger);
+  background: var(--surface);
+  border-radius: var(--radius);
+  margin: 20px;
+}
+
+.catalogue-banner {
+  text-align: center;
+  padding: 14px 20px;
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.catalogue-banner strong {
+  color: var(--accent);
+}
+
+.catalogue-empty {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.catalogue-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.cat-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+}
+
+.cat-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 24px rgba(200, 169, 81, 0.12);
+}
+
+.cat-card-img {
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.cat-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.cat-card:hover .cat-card-img img {
+  transform: scale(1.05);
+}
+
+.cat-card-body {
+  padding: 14px 16px;
+}
+
+.cat-card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cat-card-artist {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cat-card-year {
+  font-size: 0.78rem;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .catalogue {
+    padding: 16px;
+  }
+
+  .catalogue-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .cat-card-body {
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .catalogue-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

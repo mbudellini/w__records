@@ -1,0 +1,270 @@
+.rec-page {
+  padding: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.rec-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40vh;
+}
+
+.rec-error {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--danger);
+}
+
+.rec-error a {
+  display: inline-block;
+  margin-top: 16px;
+  color: var(--accent);
+}
+
+.rec-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.rec-cover {
+  position: sticky;
+  top: 100px;
+}
+
+.rec-cover img {
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.rec-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.rec-artists {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.rec-artist-pill {
+  background: var(--surface-hover);
+  color: var(--accent);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid var(--border);
+}
+
+.rec-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.rec-meta-item {
+  display: flex;
+  gap: 12px;
+}
+
+.rec-meta-label {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  min-width: 60px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.rec-meta-value {
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.rec-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 28px;
+}
+
+.rec-tag {
+  background: var(--accent);
+  color: var(--bg);
+  padding: 3px 12px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.rec-tag.muted {
+  background: var(--surface-hover);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.rec-copies {
+  margin-top: 8px;
+}
+
+.rec-copies-heading {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--accent);
+}
+
+.rec-copy {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.rec-copy-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.rec-copy-header h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.rec-copy-date {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.rec-conditions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.rec-condition-pill {
+  background: var(--surface-hover);
+  color: var(--text-muted);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  border: 1px solid var(--border);
+}
+
+.rec-purchase {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.rec-price {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent);
+  min-width: 70px;
+}
+
+.rec-qty {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rec-qty label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.rec-qty input {
+  width: 56px;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.rec-qty input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.rec-add-btn {
+  flex: 1;
+  padding: 10px 20px;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: background 0.2s;
+}
+
+.rec-add-btn:hover {
+  background: var(--accent-hover);
+}
+
+@media (max-width: 768px) {
+  .rec-page {
+    padding: 16px;
+  }
+
+  .rec-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .rec-cover {
+    position: static;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .rec-title {
+    font-size: 1.5rem;
+  }
+
+  .rec-purchase {
+    flex-wrap: wrap;
+  }
+
+  .rec-add-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .rec-conditions {
+    flex-direction: column;
+    gap: 4px;
+  }
+}

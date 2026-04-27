@@ -32,6 +32,7 @@ const register = async (req, res) => {
     const newUser = {
       email,
       password: hash,
+      isAdmin: false
     };
     await User.create(newUser);
     res.json({ ok: true, message: "Successfully registered" });
@@ -59,7 +60,7 @@ const login = async (req, res) => {
 
     const match = bcrypt.compareSync(password, user.password);
     if (match) {
-      const token = jwt.sign({ userEmail: user.email }, jwt_secret, {
+      const token = jwt.sign({ userEmail: user.email, isAdmin: user.isAdmin}, jwt_secret, {
         expiresIn: "1h",
       });
       res.json({ ok: true, message: "welcome back", token, email });

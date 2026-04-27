@@ -1,6 +1,8 @@
 import { Link, useSearchParams } from "react-router";
 import { useState, useEffect } from "react";
 import { BeatLoader } from "react-spinners";
+import { API_BASE } from "../api/config.js";
+import "./Catalogue.css";
 
 function Catalogue() {
   const [records, setRecords] = useState([]);
@@ -9,12 +11,10 @@ function Catalogue() {
   const [error, setError] = useState(null);
   const [searchParams] = useSearchParams();
 
-  // Fetch records dal backend
   useEffect(() => {
-    fetch("http://localhost:4444/records/getCollectionFromDB")
+    fetch(`${API_BASE}/records/getCollectionFromDB`)
       .then((res) => res.json())
       .then((data) => {
-        // Deduplica per ID e salva
         const uniqueData = [
           ...new Map((data.data || []).map((r) => [r.id, r])).values(),
         ];
@@ -27,13 +27,11 @@ function Catalogue() {
       });
   }, []);
 
-  // Filtra e ordina in base ai query params
   useEffect(() => {
     let results = [...records];
     const searchQuery = searchParams.get("search")?.toLowerCase() || "";
     const sortOrder = searchParams.get("sort") || "alphabetical";
 
-    // FILTRO: Ricerca per titolo o artista
     if (searchQuery) {
       results = results.filter((record) => {
         const title = record.basic_information.title?.toLowerCase() || "";
@@ -49,32 +47,31 @@ function Catalogue() {
       });
     }
 
-    // ORDINAMENTO
     switch (sortOrder) {
       case "alphabetical":
         results.sort((a, b) =>
           (a.basic_information.title || "").localeCompare(
-            b.basic_information.title || "",
-          ),
+            b.basic_information.title || ""
+          )
         );
         break;
       case "reverse":
         results.sort((a, b) =>
           (b.basic_information.title || "").localeCompare(
-            a.basic_information.title || "",
-          ),
+            a.basic_information.title || ""
+          )
         );
         break;
       case "newest":
         results.sort(
           (a, b) =>
-            (b.basic_information.year || 0) - (a.basic_information.year || 0),
+            (b.basic_information.year || 0) - (a.basic_information.year || 0)
         );
         break;
       case "oldest":
         results.sort(
           (a, b) =>
-            (a.basic_information.year || 0) - (b.basic_information.year || 0),
+            (a.basic_information.year || 0) - (b.basic_information.year || 0)
         );
         break;
       default:
@@ -85,70 +82,64 @@ function Catalogue() {
   }, [records, searchParams]);
 
   return (
-    <div className="lexend-exa">
+    <div className="catalogue">
       {loading && (
-        <div className="centerWithinMain">
-          <BeatLoader />
+        <div className="catalogue-loading">
+          <BeatLoader color="var(--accent)" />
         </div>
       )}
-      {error && <p>Error: {error}</p>}
+
+      {error && (
+        <div className="catalogue-error">Error: {error}</div>
+      )}
 
       {searchParams.get("search") && (
-        <div
-          style={{
-            padding: "20px",
-            textAlign: "center",
-            backgroundColor: "#fff3cd",
-            margin: "20px",
-          }}
-        >
-          <p>
-            Showing <strong>{filteredRecords.length}</strong> results for "
-            <strong>{searchParams.get("search")}</strong>"
-          </p>
+        <div className="catalogue-banner">
+          Showing <strong>{filteredRecords.length}</strong> results for "
+          <strong>{searchParams.get("search")}</strong>"
         </div>
       )}
 
       {!loading && filteredRecords.length === 0 && (
-        <div style={{ padding: "40px", textAlign: "center" }}>
+        <div className="catalogue-empty">
           <p>No records found. Try a different search.</p>
         </div>
       )}
 
-      <div className="gridRecordPage">
+      <div className="catalogue-grid">
         {filteredRecords.map((record) => (
           <Link
             to={`/record/${record.id}`}
-            className="record-card-link record-card orangeBorder"
+            className="cat-card"
             key={record._id}
           >
-            {record.basic_information.cover_image !== "" ? (
-              <img
-                src={record.basic_information.cover_image}
-                alt={record.basic_information.title}
-              />
-            ) : (
-              <img
-                src={
-                  "https://img.freepik.com/premium-vector/image-unavailable-icon_192037-900.jpg"
-                }
-              />
-            )}
-            <div className="titleandYear">
-              <p>{record.basic_information.title}</p>
-              <p>
-                {record.basic_information.artists?.[0]?.name}{" "}
-                {record.basic_information.artists?.[1]?.name}{" "}
-              </p>
-              {record.basic_information.year !== 0 ? (
-                <p style={{ fontSize: "12px", color: "#666" }}>
-                  {record.basic_information.year}
-                </p>
+            <div className="cat-card-img">
+              {record.basic_information.cover_image !== "" ? (
+                <img
+                  src={record.basic_information.cover_image}
+                  alt={record.basic_information.title}
+                />
               ) : (
-                <p style={{ fontSize: "12px", color: "#666" }}>
-                  Year not Available
-                </p>
+                <img
+                  src="https://img.freepik.com/premium-vector/image-unavailable-icon_192037-900.jpg"
+                  alt="Unavailable"
+                />
               )}
+            </div>
+            <div className="cat-card-body">
+              <p className="cat-card-title">
+                {record.basic_information.title}
+              </p>
+              <p className="cat-card-artist">
+                {record.basic_information.artists?.[0]?.name}
+                {record.basic_information.artists?.[1]?.name &&
+                  ` / ${record.basic_information.artists[1].name}`}
+              </p>
+              <p className="cat-card-year">
+                {record.basic_information.year !== 0
+                  ? record.basic_information.year
+                  : "Year N/A"}
+              </p>
             </div>
           </Link>
         ))}
