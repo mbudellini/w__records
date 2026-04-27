@@ -74,14 +74,14 @@ function AdminDashboard() {
     });
   };
 
-  const handleSync = async () => {
+  const handleSync = async (records) => {
     setSyncing(true);
     setSyncMessage("");
 
     try {
       const response = await api.post("/records/saveCollection");
       if (response.data.ok) {
-        setSyncMessage(`Synced successfully`);
+        setSyncMessage(`Synced successfully, ${response.data.message}`);
         const statsResponse = await api.get("/records/getCollectionFromDB");
         if (statsResponse.data.ok) {
           calculateStats(statsResponse.data.data);

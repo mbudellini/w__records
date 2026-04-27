@@ -48,6 +48,7 @@
 
 .cart-empty-link:hover {
   background: var(--accent-hover);
+  color:black
 }
 
 .cart-heading {

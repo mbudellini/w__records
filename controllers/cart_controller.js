@@ -1,4 +1,5 @@
 const Cart = require('../models/cart_model')
+const DiscogsCollection = require('../models/discogsCollection_model')
 const axios = require("axios");
 
 /**
@@ -10,16 +11,50 @@ const addToCart = async (req, res) => {
     const { userEmail, instance_id, id, title, price, quantity = 1, cover_image } = req.body;
 
     if (!userEmail || !instance_id || !id || !title || !price) {
-      return res.json({ 
-        ok: false, 
-        message: "Missing required fields: userEmail, instance_id, id, title, price" 
+      return res.json({
+        ok: false,
+        message: "Missing required fields: userEmail, instance_id, id, title, price"
+      });
+    }
+
+    // Verifica che l'item esista nella collezione
+    const record = await DiscogsCollection.findOne({ instance_id });
+    if (!record) {
+      return res.json({
+        ok: false,
+        message: "Item not found in collection"
+      });
+    }
+
+    // Verifica che l'item non sia già nel carrello di un altro utente
+    const inOtherCart = await Cart.findOne({
+      "items.instance_id": instance_id,
+      userEmail: { $ne: userEmail },
+    });
+    if (inOtherCart) {
+      return res.json({
+        ok: false,
+        message: "Item is no longer available (already in another user's cart)"
       });
     }
 
     let cart = await Cart.findOne({ userEmail });
 
+    // Controlla se l'item è già nel carrello dell'utente (1 copia max per instance_id)
+    if (cart) {
+      const alreadyInCart = cart.items.find(item => item.instance_id === instance_id);
+      if (alreadyInCart) {
+        return res.json({
+          ok: false,
+          message: "Item is already in your cart"
+        });
+      }
+    }
+
+    // Ogni instance_id è una singola copia fisica, quantità forzata a 1
+    const finalQuantity = 1;
+
     if (!cart) {
-      // Crea un nuovo carrello
       cart = await Cart.create({
         userEmail,
         items: [{
@@ -27,45 +62,35 @@ const addToCart = async (req, res) => {
           id,
           title,
           price,
-          quantity,
+          quantity: finalQuantity,
           cover_image,
         }],
-        totalPrice: price * quantity,
+        totalPrice: price * finalQuantity,
       });
-      return res.json({ 
-        ok: true, 
-        message: "Item added to new cart", 
-        data: cart 
-      });
-    }
-
-    // Controlla se l'item è già nel carrello
-    const existingItem = cart.items.find(item => item.instance_id === instance_id);
-
-    if (existingItem) {
-      // Aumenta la quantità
-      existingItem.quantity += quantity;
-    } else {
-      // Aggiungi un nuovo item
-      cart.items.push({
-        instance_id,
-        id,
-        title,
-        price,
-        quantity,
-        cover_image,
+      return res.json({
+        ok: true,
+        message: "Item added to new cart",
+        data: cart
       });
     }
 
-    // Ricalcola il totalPrice
+    cart.items.push({
+      instance_id,
+      id,
+      title,
+      price,
+      quantity: finalQuantity,
+      cover_image,
+    });
+
     cart.totalPrice = cart.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     cart.updated_at = new Date();
 
     await cart.save();
-    res.json({ 
-      ok: true, 
-      message: "Item added to cart successfully", 
-      data: cart 
+    res.json({
+      ok: true,
+      message: "Item added to cart successfully",
+      data: cart
     });
   } catch (error) {
     res.json({ 
