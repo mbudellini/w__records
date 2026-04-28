@@ -38,7 +38,6 @@ function AuthProvider({ children }) {
     };
     localStorage.setItem("token", JSON.stringify(token));
     localStorage.setItem("user", JSON.stringify(user));
-    api.defaults.headers.common["Authorization"] = token;
     setUser(user);
     setToken(token);
     setIsLoggedIn(true);
@@ -47,7 +46,6 @@ function AuthProvider({ children }) {
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    delete api.defaults.headers.common["Authorization"];
     setIsLoggedIn(false);
     setUser(null);
     setToken(null);

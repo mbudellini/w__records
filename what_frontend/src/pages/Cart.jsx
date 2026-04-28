@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router";
+import { useState, useEffect} from "react";
+import { Link, useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext.jsx";
 import api from "../api/config.js";
 import "./Cart.css";
+
 
 function Cart() {
   const { user } = useAuth();
@@ -11,6 +12,31 @@ function Cart() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [totalPrice, setTotalPrice] = useState(0);
+  const navigate= useNavigate()
+
+   const createCheckoutSession = async (products) => {
+    try {
+      // 2. Sending request to the create_checkout_session controller and passing products to be paid for
+      const response = await api.post(
+        `/payment/create-checkout-session`,
+        { products }
+      );
+      return response.data.ok
+        ? // we save session id in localStorage to get it later
+          (localStorage.setItem(
+            "sessionId",
+            JSON.stringify(response.data.sessionId)
+          ),
+          // 9. If server returned ok after making a session we send them to the URL of the checkout session at Stripe to the actual checkout / payment form
+          window.location.href = response.data.url
+        )
+        : navigate("/payment/error");
+    } catch (error) {
+      navigate("/payment/error");
+    }
+  };
+
+
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -139,7 +165,7 @@ function Cart() {
               <span>${totalPrice.toFixed(2)}</span>
             </div>
           </div>
-          <button className="cart-checkout-btn">Proceed to Checkout</button>
+          <button onClick={()=>createCheckoutSession(cartItems)} className="cart-checkout-btn">Proceed to Checkout</button>
         </div>
       </div>
     </div>

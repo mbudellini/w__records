@@ -22,5 +22,6 @@ app.use(require('cors')())
 app.use('/records',require('./routes/discogsCollection_routes.js'))
 app.use('/users',require('./routes/users_routes.js'))
 app.use('/cart',require('./routes/cart_routes.js'))
+app.use('/payment', require('./routes/payment_routes.js'));
 //==========================================================================
 app.listen(port, () => console.log("🚀 Listening on port: " + port + " 🚀"));

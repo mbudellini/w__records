@@ -6,6 +6,8 @@ import Register from "./pages/Register.jsx";
 import Navbar from "./components/Navbar.jsx";
 import AdminDashboard from "./pages/AdminDashboard.jsx";
 import Cart from "./pages/Cart.jsx";
+import PaymentSuccess from './pages/Payment_success.jsx';
+import PaymentFailed from './pages/Payment_failed.jsx';
 import { AuthProvider } from "./context/AuthContext.jsx";
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
             <Route path="/users/register" element={<Register />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/payment-success" element={<PaymentSuccess />} />
+            <Route path="/payment-failed" element={<PaymentFailed />} />
           </Routes>
         </main>
       </Router>
