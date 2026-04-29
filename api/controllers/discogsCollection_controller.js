@@ -41,7 +41,7 @@ const saveCollection = async (req, res) => {
       page++;
     } while (page <= totalPages);
     const { deletedCount } = await Record.deleteMany({
-      instance_id: { $nin: discogsInstanceIds },
+      instance_id: { $nin: discogsInstancesIds },
     });
 
     res.send({
