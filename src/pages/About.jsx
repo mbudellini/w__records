@@ -37,9 +37,9 @@ function About() {
           </p>
         </div>
         <div className="about-img-row">
-          <img src="/resources/img/cratedig.png" alt="Crate digging" />
+          <img src="/resources/img/cratedig.PNG" alt="Crate digging" />
           <img
-            src="/resources/img/crateshow.jpg"
+            src="/resources/img/crateshow.JPG"
             alt="Close-up of vinyl grooves"
           />
         </div>
@@ -71,8 +71,8 @@ function About() {
             src="/resources/video/video_records.mp4"
           />
           <img
-            src="/resources/img/bohm.jpg"
-            alt="Records organised by genre"
+            src="/resources/img/bohm.JPG"
+            alt="special relativity record"
           />
         </div>
       </section>
