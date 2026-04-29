@@ -12,7 +12,7 @@ function About() {
         </div>
         <div className="about-hero-img">
           <img
-            src="../../resources/img/disqueria.jpg"
+            src="/resources/img/disqueria.jpg"
             alt="Disqueria What? storefront or interior"
           />
         </div>
@@ -37,9 +37,9 @@ function About() {
           </p>
         </div>
         <div className="about-img-row">
-          <img src="../../resources/img/cratedig.png" alt="Crate digging" />
+          <img src="/resources/img/cratedig.png" alt="Crate digging" />
           <img
-            src="../../resources/img/crateshow.jpg"
+            src="/resources/img/crateshow.jpg"
             alt="Close-up of vinyl grooves"
           />
         </div>
@@ -62,16 +62,16 @@ function About() {
           </p>
         </div>
         <div className="about-img-row three">
-          <img src="../../resources/img/burial.jpg" alt="Assorted vinyl records" />
+          <img src="/resources/img/burial.jpg" alt="Assorted vinyl records" />
           <video
             autoPlay
             muted
             loop
             playsInline
-            src="../../resources/video/video_records.mp4"
+            src="/resources/video/video_records.mp4"
           />
           <img
-            src="../../resources/img/bohm.jpg"
+            src="/resources/img/bohm.jpg"
             alt="Records organised by genre"
           />
         </div>
@@ -97,9 +97,9 @@ function About() {
           </p>
         </div>
         <div className="about-img-row three">
-          <img src="../../resources/img/future_archives_1.JPG" alt="infographic future archives" />
-          <img src="../../resources/img/future_archives_2.JPG" alt="infographic future archives" />
-          <img src="../../resources/img/garage_sale.JPG" alt="infographic garage sale" />
+          <img src="/resources/img/future_archives_1.JPG" alt="infographic future archives" />
+          <img src="/resources/img/future_archives_2.JPG" alt="infographic future archives" />
+          <img src="/resources/img/garage_sale.JPG" alt="infographic garage sale" />
         </div>
       </section>
 
