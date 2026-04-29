@@ -5,14 +5,14 @@ function About() {
     <div className="about">
       <section className="about-hero">
         <div className="about-hero-text">
-          <h2>Our Story</h2>
+          <h2>What is What?</h2>
           <p className="about-subtitle">
-            Disqueria What? — more than a record shop.
+            Disqueria What? — a pop-up record shop with no fixed address.
           </p>
         </div>
         <div className="about-hero-img">
           <img
-            src="/images/about-hero.jpg"
+            src="../../resources/img/disqueria.jpg"
             alt="Disqueria What? storefront or interior"
           />
         </div>
@@ -23,20 +23,23 @@ function About() {
           <h3>How It All Started</h3>
           <p>
             Disqueria What? was born from a simple idea: curate a selection of
-            vinyl records that truly matter. What started as a personal
-            collection shared among friends has grown into a destination for
-            collectors and music lovers who care about quality over quantity.
+            vinyl records that truly matter (that make you say "whaaat?").
+            Started as a personal collection has grown into a travelling pop-up
+            that brings records to the people — no fixed shop, just crates,
+            good music, and the right vibe.
           </p>
           <p>
-            Every record in our catalogue is hand-picked. We dig through crates,
-            estate sales, and private collections so you don't have to —
-            bringing you pressings that sound as good as they look on the shelf.
+            Every record in our catalogue is hand-picked by me. I'm a DJ and
+            digging through crates, estate sales, and private collections is one
+            of my favourite hobbies. Sharing is caring to me, that's why as a DJ
+            I choose to move also on record selling: is another way of share
+            music and connect people.
           </p>
         </div>
         <div className="about-img-row">
-          <img src="/images/about-crate-digging.jpg" alt="Crate digging" />
+          <img src="../../resources/img/cratedig.png" alt="Crate digging" />
           <img
-            src="/images/about-vinyl-closeup.jpg"
+            src="../../resources/img/crateshow.jpg"
             alt="Close-up of vinyl grooves"
           />
         </div>
@@ -44,50 +47,59 @@ function About() {
 
       <section className="about-section reverse">
         <div className="about-text">
-          <h3>What We Stand For</h3>
+          <h3>The Collection</h3>
           <p>
-            We believe music deserves a physical format. Vinyl forces you to
-            slow down, listen to a full side, appreciate the artwork, and hold
-            something real. In a world of infinite streaming, that matters.
+            The catalogue focus on electronic but you can find selected gems
+            from other genres: including classic rock, jazz, hip-hop, and
+            everything in between. I source internationally with a focus on
+            original and audiophile pressings.
           </p>
           <p>
-            Our focus is on condition, press quality, and fair pricing. Every
-            record is visually graded and play-tested before it reaches the
-            catalogue. No surprises when the needle drops.
+            Every record is visually graded and if something doesn't meet the
+            standard, it doesn't go up for sale. Browse the full catalogue here
+            on the site, or find me on Discogs where I manage and sync the
+            inventory in real time.
           </p>
         </div>
-        <div className="about-img-single">
+        <div className="about-img-row three">
+          <img src="../../resources/img/burial.jpg" alt="Assorted vinyl records" />
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            src="../../resources/video/video_records.mp4"
+          />
           <img
-            src="/images/about-turntable.jpg"
-            alt="Turntable playing a record"
+            src="../../resources/img/bohm.jpg"
+            alt="Records organised by genre"
           />
         </div>
       </section>
 
       <section className="about-section">
         <div className="about-text">
-          <h3>The Collection</h3>
+          <h3>Pop-Up Events</h3>
           <p>
-            Our catalogue focus on electronic but you can find selected gems
-            from other genres: including classic rock, jazz, hip-hop, and
-            everything in between. We source internationally with a focus on
-            original and audiophile pressings.
+            Disqueria What? doesn't have a permanent location — and that's the
+            point. The collection travels, sets up for a day or a weekend, and
+            then moves on. Each pop-up is different: a market stall, a club
+            foyer, a record fair, a friend's courtyard.
           </p>
           <p>
-            Browse the full catalogue here on the site, or find us on Discogs
-            where we manage and sync our inventory in real time.
+            So far the crates have landed at{" "}
+            <strong>Future Archives</strong> (twice), the{" "}
+            <strong>Garage Sale at Borgo San Giovanni</strong>, and a few
+            market events organised together with{" "}
+            <strong>Provvisorio Clothing</strong>. Every pop-up is a chance to
+            dig through the selection in person, have a chat, and walk away with
+            something you didn't know you needed.
           </p>
         </div>
         <div className="about-img-row three">
-          <img src="/images/about-genres-1.jpg" alt="Assorted vinyl records" />
-          <img
-            src="/images/about-genres-2.jpg"
-            alt="Record sleeves on display"
-          />
-          <img
-            src="/images/about-genres-3.jpg"
-            alt="Records organised by genre"
-          />
+          <img src="../../resources/img/future_archives_1.JPG" alt="infographic future archives" />
+          <img src="../../resources/img/future_archives_2.JPG" alt="infographic future archives" />
+          <img src="../../resources/img/garage_sale.JPG" alt="infographic garage sale" />
         </div>
       </section>
 
@@ -99,7 +111,7 @@ function About() {
           rel="noopener noreferrer"
           className="about-cta-btn"
         >
-          Find us on Discogs
+          Contact me on Discogs
         </a>
       </section>
     </div>

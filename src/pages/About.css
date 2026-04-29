@@ -85,24 +85,13 @@
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-.about-img-row img {
+.about-img-row img,
+.about-img-row video {
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: var(--radius);
   border: 1px solid var(--border);
-}
-
-.about-img-single {
-  border-radius: var(--radius);
-  overflow: hidden;
-  border: 1px solid var(--border);
-}
-
-.about-img-single img {
-  width: 100%;
-  aspect-ratio: 3 / 2;
-  object-fit: cover;
 }
 
 /* CTA */
