@@ -46,7 +46,7 @@ function Navbar() {
       <div className="navbar-inner">
         <div className="navbar-links">
           <Link to="/" className="navbar-link">Catalogue</Link>
-          <span className="navbar-link muted">About</span>
+          <Link to="/about" className="navbar-link">About</Link>
           <a
             href="https://www.discogs.com/user/disqueria_what"
             className="navbar-link"
@@ -138,6 +138,7 @@ function Navbar() {
       {mobileMenuOpen && (
         <div className="navbar-mobile">
           <Link to="/" className="navbar-mobile-link" onClick={() => setMobileMenuOpen(false)}>Catalogue</Link>
+          <Link to="/about" className="navbar-mobile-link" onClick={() => setMobileMenuOpen(false)}>About</Link>
           <a
             href="https://www.discogs.com/user/disqueria_what"
             className="navbar-mobile-link"
