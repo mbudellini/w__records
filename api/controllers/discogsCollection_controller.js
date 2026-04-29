@@ -19,31 +19,36 @@ const saveCollection = async (req, res) => {
     let page = 1;
     let totalPages = 1;
     let saved = 0;
-
+    const discogsInstancesIds = [];
     do {
       const response = await axios.get(`${BASE_URL}&page=${page}`, HEADERS);
       const { pagination, releases } = response.data;
       totalPages = pagination.pages;
 
       for (const release of releases) {
-        await Record.findOneAndUpdate({ instance_id: release.instance_id }, release, {
-          upsert: true,
-          returnDocument: "after",
-        });
+        await Record.findOneAndUpdate(
+          { instance_id: release.instance_id },
+          release,
+          {
+            upsert: true,
+            returnDocument: "after",
+          },
+        );
+        discogsInstancesIds.push(release.instance_id);
         saved++;
       }
 
       page++;
     } while (page <= totalPages);
-const { deletedCount } = await Record.deleteMany({
+    const { deletedCount } = await Record.deleteMany({
       instance_id: { $nin: discogsInstanceIds },
     });
 
     res.send({
       ok: true,
       message: `${saved} records saved, ${deletedCount} records removed from the database.`,
-    });}
-    catch (error) {
+    });
+  } catch (error) {
     res.send({ ok: false, message: error.message });
   }
 };
@@ -51,14 +56,14 @@ const { deletedCount } = await Record.deleteMany({
 const getCollectionFromDB = async (req, res) => {
   try {
     const records = await Record.find();
-    res.send({ 
-      ok: true, 
+    res.send({
+      ok: true,
       message: `Retrieved ${records.length} records from database.`,
-      data: records 
+      data: records,
     });
   } catch (error) {
     res.send({ ok: false, message: error.message });
-  } 
+  }
 };
 
 module.exports = {
