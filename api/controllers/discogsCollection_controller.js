@@ -35,9 +35,15 @@ const saveCollection = async (req, res) => {
 
       page++;
     } while (page <= totalPages);
+const { deletedCount } = await Record.deleteMany({
+      instance_id: { $nin: discogsInstanceIds },
+    });
 
-    res.send({ ok: true, message: `${saved} records saved to the database.` });
-  } catch (error) {
+    res.send({
+      ok: true,
+      message: `${saved} records saved, ${deletedCount} records removed from the database.`,
+    });}
+    catch (error) {
     res.send({ ok: false, message: error.message });
   }
 };
