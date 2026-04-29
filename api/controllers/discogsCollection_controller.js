@@ -1,5 +1,5 @@
 const axios = require("axios");
-const Record = require("../models/discogsCollection_model");
+const { DiscogsCollection: Record } = require("../models/models");
 
 const BASE_URL =
   "https://api.discogs.com/users/disqueria_what/collection/folders/0/releases?token=KLFeKFjuERpdHJsrNQGCoSUUTbPGfcTskJfkuHIP";

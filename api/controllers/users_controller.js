@@ -1,4 +1,4 @@
-const User = require("../models/users_model");
+const { User } = require("../models/models");
 const bcrypt = require("bcrypt"); // https://github.com/dcodeIO/bcrypt.js#readme
 const jwt = require("jsonwebtoken");
 const validator = require("validator");

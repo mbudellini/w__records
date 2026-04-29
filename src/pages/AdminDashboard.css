@@ -1,0 +1,378 @@
+.admin-page {
+  padding: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admin-heading {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.admin-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40vh;
+}
+
+.admin-sync {
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.admin-sync h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.admin-sync-btn {
+  padding: 10px 24px;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.admin-sync-btn:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.admin-sync-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admin-sync-msg {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px;
+  background: var(--surface-hover);
+  border-radius: var(--radius-sm);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.admin-stat {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+}
+
+.admin-stat h3 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.admin-stat-val {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.admin-stat-full {
+  grid-column: 1 / -1;
+}
+
+.admin-genres {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.admin-genre-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: var(--surface-hover);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--accent);
+}
+
+.admin-genre-name {
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.admin-genre-count {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.admin-last-sync {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .admin-page {
+    padding: 16px;
+  }
+
+  .admin-sync {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .admin-heading {
+    font-size: 1.4rem;
+  }
+}
+
+/* Orders Section */
+.admin-orders-section {
+  margin-top: 48px;
+}
+
+.admin-orders-section h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 20px;
+  font-family: var(--font-display);
+}
+
+.admin-orders-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.admin-no-orders {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.admin-orders-table-wrapper {
+  overflow-x: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.admin-orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.admin-orders-table thead {
+  background: var(--surface-hover);
+  border-bottom: 2px solid var(--accent);
+}
+
+.admin-orders-table th {
+  padding: 16px 12px;
+  text-align: left;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.8rem;
+}
+
+.admin-orders-table tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.2s;
+}
+
+.admin-orders-table tbody tr:hover {
+  background-color: var(--surface-hover);
+}
+
+.admin-orders-table td {
+  padding: 14px 12px;
+  color: var(--text);
+}
+
+.admin-order-number {
+  font-weight: 700;
+  color: var(--accent);
+  font-family: 'Courier New', monospace;
+}
+
+.admin-order-amount {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 1rem;
+}
+
+.admin-order-email {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.admin-order-items {
+  max-width: 200px;
+}
+
+.items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.item-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 8px;
+  background: var(--surface-hover);
+  border-radius: 3px;
+  font-size: 0.8rem;
+  gap: 8px;
+}
+
+.item-name {
+  flex: 1;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.item-qty {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.admin-order-session {
+  max-width: 150px;
+}
+
+.admin-order-session code {
+  background: var(--surface-hover);
+  padding: 4px 6px;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  color: var(--accent);
+  font-family: 'Courier New', monospace;
+  word-break: break-all;
+}
+
+.admin-order-date {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.admin-order-status {
+  text-align: center;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-paid {
+  background: var(--surface-hover);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.status-unpaid {
+  background: var(--surface-hover);
+  color: var(--text-muted);
+  border: 1px solid var(--text-muted);
+}
+
+.status-pending {
+  background: var(--surface-hover);
+  color: var(--text-muted);
+  border: 1px solid var(--text-muted);
+}
+
+.status-error {
+  background: var(--danger);
+  color: white;
+}
+
+@media (max-width: 1024px) {
+  .admin-orders-table {
+    font-size: 0.8rem;
+  }
+
+  .admin-order-session code {
+    font-size: 0.7rem;
+    max-width: 80px;
+  }
+
+  .admin-orders-table th,
+  .admin-orders-table td {
+    padding: 10px 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-orders-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .admin-orders-table {
+    font-size: 0.75rem;
+  }
+
+  .admin-orders-table th,
+  .admin-orders-table td {
+    padding: 8px 4px;
+  }
+
+  .admin-order-session {
+    max-width: 100px;
+  }
+
+  .admin-order-session code {
+    font-size: 0.65rem;
+    max-width: 60px;
+  }
+
+  .item-detail {
+    font-size: 0.7rem;
+    padding: 4px 6px;
+  }
+}

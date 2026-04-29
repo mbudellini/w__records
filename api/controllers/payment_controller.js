@@ -1,11 +1,11 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-console.log(2, stripe)
+const { Payment } = require('../models/models')
 // 3. To create a payment session in Stripe
 const create_checkout_session = async (req, res) => {
   try {
     // 4. getting products from the body
     const { products } = req.body;
-    console.log(products)
+    console.log(products);
     if (products.length < 1 || !products)
       return res.send({
         ok: false,
@@ -19,8 +19,8 @@ const create_checkout_session = async (req, res) => {
         unit_amount: item.price * 100,
         product_data: {
           name: item.title,
-          description: item.description||'album',
-          images: [item.cover_image]
+          description: item.description || "album",
+          images: [item.cover_image],
         },
       },
       quantity: item.quantity,
@@ -36,7 +36,7 @@ const create_checkout_session = async (req, res) => {
     // 6. Actually making a session with Stripe
     session = await stripe.checkout.sessions.create({
       payment_method_types: process.env.PAYMENT_METHODS.split(", "),
-      locale: 'en-GB', //specify the language of the payment page of Stripe- for example for Spanish language change 'en/GB' to '/es'
+      locale: "en-GB", //specify the language of the payment page of Stripe- for example for Spanish language change 'en/GB' to '/es'
       line_items: line,
       mode: "payment",
       customer_creation: "always",
@@ -47,7 +47,7 @@ const create_checkout_session = async (req, res) => {
       cancel_url: `${process.env.DOMAIN}/payment-failed`,
     });
     // 8. If session created  successful we send back ok and session URL to the client
-    return res.send({ok:true, url:session.url, sessionId: session.id});
+    return res.send({ ok: true, url: session.url, sessionId: session.id });
   } catch (error) {
     console.log("ERROR =====>", error.raw.message);
     return res.send({ ok: false, message: error.raw.message });
@@ -57,14 +57,19 @@ const create_checkout_session = async (req, res) => {
 // 14. Controller triggers by the incoming req with session id
 const checkout_session = async (req, res) => {
   try {
-    const { sessionId } = req.query;
+    const { orderDetails } = req.body;
+    console.log(orderDetails)
+    const sessionId = orderDetails.sessionId
+    console.log('SessionID=' + sessionId)
     // 15. We execute request to Stripe to get data for the specific session ID
     const session = await stripe.checkout.sessions.retrieve(sessionId, {
       expand: ["line_items", "customer"],
     });
+    console.log(session)
     // 16. From the session received above we get customer info
     const customer = await stripe.customers.retrieve(session.customer.id);
     // 17. And sending both session and customer to the client
+    const saved= await Payment.create({email:customer.email, sessionId: sessionId})
     return res.send({ ok: true, session, customer });
   } catch (error) {
     console.log("ERROR =====>", error);
@@ -72,7 +77,57 @@ const checkout_session = async (req, res) => {
   }
 };
 
+// 18. Get all orders from database
+const get_all_orders = async (req, res) => {
+  try {
+    const payments = await Payment.find().sort({ created: -1 });
+    
+    const ordersWithDetails = await Promise.all(
+      payments.map(async (payment, index) => {
+        try {
+          const session = await stripe.checkout.sessions.retrieve(payment.sessionId, {
+            expand: ["line_items", "customer"],
+          });
+          
+          const items = session.line_items.data.map(item => ({
+            name: item.description || 'Unknown',
+            quantity: item.quantity,
+            price: (item.amount_total / 100).toFixed(2),
+          }));
+          
+          return {
+            orderNumber: `ORD-${String(index + 1).padStart(5, '0')}`,
+            sessionId: payment.sessionId,
+            email: payment.email,
+            amount: (session.amount_total / 100).toFixed(2),
+            items: items,
+            createdAt: new Date(payment.created).toLocaleString('it-IT'),
+            status: session.payment_status,
+          };
+        } catch (error) {
+          console.error(`Error fetching session ${payment.sessionId}:`, error);
+          return {
+            orderNumber: `ORD-${String(index + 1).padStart(5, '0')}`,
+            sessionId: payment.sessionId,
+            email: payment.email,
+            amount: 'N/A',
+            items: [],
+            createdAt: new Date(payment.created).toLocaleString('it-IT'),
+            status: 'error',
+          };
+        }
+      })
+    );
+    
+    return res.send({ ok: true, orders: ordersWithDetails });
+  } catch (error) {
+    console.error("ERROR =====>", error);
+    return res.send({ ok: false, message: error.message });
+  }
+};
+
 module.exports = {
   create_checkout_session,
   checkout_session,
+  get_all_orders,
 };

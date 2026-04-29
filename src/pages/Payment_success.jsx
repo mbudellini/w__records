@@ -1,28 +1,32 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router';
-import './Payment_success.css';
-
+import { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router";
+import "./Payment_success.css";
+import api from "../api/config.js";
 export default function PaymentSuccess() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const sessionId = searchParams.get('session_id');
+  const sessionId = searchParams.get("session_id");
   const [orderDetails, setOrderDetails] = useState({
-    orderNumber: 'ORD-' + Math.random().toString(36).substr(2, 9).toUpperCase(),
-    date: new Date().toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
+    orderNumber: "ORD-" + Math.random().toString(36).substr(2, 9).toUpperCase(),
+    date: new Date().toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     }),
-    sessionId: sessionId || 'N/A'
+    sessionId: sessionId || "N/A",
   });
 
-  useEffect(() => {
-    // Auto-redirect to home after 10 seconds
-    const timer = setTimeout(() => {
-      navigate('/');
-    }, 10000);
-    return () => clearTimeout(timer);
-  }, [navigate]);
+useEffect(()=>{
+const storeDetails = async ()=>{
+    try {
+        const response =await api.post('/payment/checkout-session', {orderDetails})
+        console.log(response)
+    } catch (error) {
+        console.log(error)
+    }
+}
+storeDetails()
+},[])
 
   return (
     <div className="payment-success-container">
@@ -64,7 +68,12 @@ export default function PaymentSuccess() {
           </div>
           <div className="detail-item">
             <span className="detail-label">Session ID:</span>
-            <span className="detail-value" style={{fontSize: '11px', wordBreak: 'break-all'}}>{orderDetails.sessionId}</span>
+            <span
+              className="detail-value"
+              style={{ fontSize: "11px", wordBreak: "break-all" }}
+            >
+              {orderDetails.sessionId}
+            </span>
           </div>
         </div>
 
@@ -82,22 +91,14 @@ export default function PaymentSuccess() {
         <div className="action-buttons">
           <button
             className="btn btn-primary"
-            onClick={() => navigate('/catalogue')}
+            onClick={() => navigate("/catalogue")}
           >
             Continue Shopping
           </button>
-          <button
-            className="btn btn-secondary"
-            onClick={() => navigate('/')}
-          >
+          <button className="btn btn-secondary" onClick={() => navigate("/")}>
             Back to Home
           </button>
         </div>
-
-        {/* Auto-redirect Notice */}
-        <p className="redirect-notice">
-          Redirecting to home page in 10 seconds...
-        </p>
       </div>
     </div>
   );

@@ -1,5 +1,4 @@
-const Cart = require('../models/cart_model')
-const DiscogsCollection = require('../models/discogsCollection_model')
+const { Cart, DiscogsCollection } = require('../models/models')
 const axios = require("axios");
 
 /**

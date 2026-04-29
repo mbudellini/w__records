@@ -5,7 +5,9 @@ import "./AdminDashboard.css";
 
 function AdminDashboard() {
   const [stats, setStats] = useState(null);
+  const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [ordersLoading, setOrdersLoading] = useState(false);
   const [syncing, setSyncing] = useState(false);
   const [syncMessage, setSyncMessage] = useState("");
 
@@ -23,7 +25,22 @@ function AdminDashboard() {
       }
     };
     fetchStats();
+    fetchOrders();
   }, []);
+
+  const fetchOrders = async () => {
+    setOrdersLoading(true);
+    try {
+      const response = await api.get("/payment/all-orders");
+      if (response.data.ok) {
+        setOrders(response.data.orders);
+      }
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+    } finally {
+      setOrdersLoading(false);
+    }
+  };
 
   const calculateStats = (records) => {
     const uniqueRecords = [
@@ -160,6 +177,62 @@ function AdminDashboard() {
           </div>
         </div>
       )}
+
+      <div className="admin-orders-section">
+        <h2>Orders</h2>
+        {ordersLoading ? (
+          <div className="admin-orders-loading">
+            <BeatLoader color="var(--accent)" size={12} />
+          </div>
+        ) : orders.length === 0 ? (
+          <p className="admin-no-orders">No orders yet</p>
+        ) : (
+          <div className="admin-orders-table-wrapper">
+            <table className="admin-orders-table">
+              <thead>
+                <tr>
+                  <th>Order #</th>
+                  <th>Amount €</th>
+                  <th>Email</th>
+                  <th>Items</th>
+                  <th>Session ID</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {orders.map((order) => (
+                  <tr key={order.sessionId}>
+                    <td className="admin-order-number">{order.orderNumber}</td>
+                    <td className="admin-order-amount">€{order.amount}</td>
+                    <td className="admin-order-email">{order.email}</td>
+                    <td className="admin-order-items">
+                      <div className="items-list">
+                        {order.items.map((item, idx) => (
+                          <div key={idx} className="item-detail">
+                            <span className="item-name">{item.name}</span>
+                            <span className="item-qty">x{item.quantity}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </td>
+                    <td className="admin-order-session">
+                      <code>{order.sessionId}</code>
+                    </td>
+                    <td className="admin-order-date">{order.createdAt}</td>
+                    <td className="admin-order-status">
+                      <span className={`status-badge status-${order.status}`}>
+                        {order.status === 'paid' ? 'Paid' : 
+                         order.status === 'unpaid' ? 'Unpaid' : 'Pending'}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
