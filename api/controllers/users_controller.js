@@ -61,7 +61,7 @@ const login = async (req, res) => {
     const match = bcrypt.compareSync(password, user.password);
     if (match) {
       const token = jwt.sign({ userEmail: user.email, isAdmin: user.isAdmin}, jwt_secret, {
-        expiresIn: "1h",
+        expiresIn: "7d",
       });
       res.json({ ok: true, message: "welcome back", token, email });
     } else return res.json({ ok: false, message: "Invalid data provided" });
